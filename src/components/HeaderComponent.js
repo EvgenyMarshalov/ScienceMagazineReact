@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import { Navbar, NavbarBrand, Nav, NavbarToggler, Collapse, NavItem, Jumbotron,
-    Button, Modal, ModalHeader, ModalBody,
+    Button, Modal, ModalHeader, ModalBody, DropdownToggle,
+  DropdownMenu, DropdownItem, UncontrolledDropdown,
     Form, FormGroup, Input, Label } from 'reactstrap';
 import { NavLink } from 'react-router-dom';
+import { LinkContainer } from 'react-router-bootstrap';
+
 
 class Header extends Component {
   constructor(props) {
@@ -36,49 +39,59 @@ handleLogin(event) {
     event.preventDefault();
 
 }
-  
+
   render() {
     return(
     <React.Fragment>
+    <Jumbotron>
+         <div className="container">
+            <div className="row row-header">
+                <div className="col-12 col-sm-2 offset-sm-1 align-self-center">
+                  <img className="img-responsive" src="/assets/images/logo2.gif" alt="logo" width="150" height="150"/>
+                </div>
+                <div className="col-12 col-sm-8">
+                    <h1>Science Magazine</h1>
+                    <p>Science Magazine is a peer-reviewed bimonthly journal that publishes original research papers on all aspects of power engineering (production, transmission and consumption of electricity and heat). Issues of mathematical modeling, IT support and economic analysis in power engineering are also in the scope of our journal. Both experimental and theoretical studies are accepted with preference to those concerning energy saving and ecology issues.</p>
+                </div>
+            </div>
+        </div>
+     </Jumbotron>
+
       <Navbar dark expand="md">
         <div className="container">
             <NavbarToggler onClick={this.toggleNav} />
-            <NavbarBrand className="mr-auto" href="/"><img src='/assets/images/logo.png' height="30" width="41" alt='Ristorante Con Fusion' /></NavbarBrand>
                 <Collapse isOpen={this.state.isNavOpen} navbar>
-                    <Nav navbar>
+                    <Nav navbar ml-auto mr-auto>
                         <NavItem>
-                            <NavLink className="nav-link" to='/home'><span className="fa fa-home fa-lg"></span> Home</NavLink>
+                            <NavLink className="nav-link" to='/home2'><span className="fa fa-home fa-lg"></span> Home</NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink className="nav-link" to='/aboutus'><span className="fa fa-info fa-lg"></span> About Us</NavLink>
+                            <NavLink className="nav-link" to='/content'><span className="fa fa-book fa-lg"></span> Content</NavLink>
                         </NavItem>
-                        <NavItem>
-                            <NavLink className="nav-link" to='/menu'><span className="fa fa-list fa-lg"></span> Menu</NavLink>
-                        </NavItem>
-                        <NavItem>
-                            <NavLink className="nav-link" to='/contactus'><span className="fa fa-address-card fa-lg"></span> Contact Us</NavLink>
-                        </NavItem>
-                    </Nav>
-                    <Nav className="ml-auto" navbar>
+                        <UncontrolledDropdown nav inNavbar>
+                              <DropdownToggle nav caret><span class="fa fa-info fa-lg"></span> Information for </DropdownToggle>
+                              <DropdownMenu right>
+                                <LinkContainer to="/infauthors"><DropdownItem> Information for authors </DropdownItem></LinkContainer>
+                                <LinkContainer to="/infreviewers"><DropdownItem> Information for reviewers </DropdownItem></LinkContainer>
+                                <LinkContainer to="/infreaders"><DropdownItem> Information for readers </DropdownItem></LinkContainer>
+                              </DropdownMenu>
+                        </UncontrolledDropdown>
+                        <UncontrolledDropdown nav inNavbar>
+                              <DropdownToggle nav caret><span class="fa fa-comment fa-lg"></span> About us </DropdownToggle>
+                              <DropdownMenu right>
+                                <LinkContainer to="/aboutus"><DropdownItem> About a journal </DropdownItem></LinkContainer>
+                                <LinkContainer to="/editorial"><DropdownItem> Editorial Board </DropdownItem></LinkContainer>
+                                <LinkContainer to="/benefits"><DropdownItem> Author benefits </DropdownItem></LinkContainer>
+                              </DropdownMenu>
+                        </UncontrolledDropdown>
                         <NavItem>
                             <Button outline onClick={this.toggleModal}><span className="fa fa-sign-in fa-lg"></span> Login</Button>
                         </NavItem>
                     </Nav>
-
                 </Collapse>
-
         </div>
       </Navbar>
-      <Jumbotron>
-           <div className="container">
-               <div className="row row-header">
-                   <div className="col-12 col-sm-6">
-                       <h1>Ristorante con Fusion</h1>
-                       <p>We take inspiration from the World's best cuisines, and create a unique fusion experience. Our lipsmacking creations will tickle your culinary senses!</p>
-                   </div>
-               </div>
-           </div>
-       </Jumbotron>
+
        <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
             <ModalHeader toggle={this.toggleModal}>Login</ModalHeader>
             <ModalBody>

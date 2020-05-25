@@ -1,5 +1,12 @@
 import React, { Component } from 'react';
 import Home from './HomeComponent';
+import Home2 from './HomeComponent2';
+import Content from './ContentComponent';
+import Editorial from './EditorialComponent';
+import Benefits from './BenefitsComponent';
+import Infreaders from './InfreadersComponent';
+import Infreviewers from './InfreviewersComponent';
+import Infauthors from './InfauthorsComponent';
 import About from './AboutComponent';
 import Menu from './MenuComponent';
 import Contact from './ContactComponent';
@@ -15,7 +22,8 @@ const mapStateToProps = state => {
     dishes: state.dishes,
     comments: state.comments,
     promotions: state.promotions,
-    leaders: state.leaders
+    leaders: state.leaders,
+    news: state.news
   }
 }
 
@@ -47,6 +55,17 @@ class Main extends Component {
       );
     }
 
+    const HomePage2 = () => {
+      return(
+          <Home2
+              dish={this.props.dishes.dishes.filter((dish) => dish.featured)[0]}
+              promotion={this.props.promotions.filter((promo) => promo.featured)[0]}
+              leader={this.props.leaders.filter((leader) => leader.featured)[0]}
+              news={this.props.news}
+          />
+      );
+    }
+
     const DishWithId = ({match}) => {
       return(
           <DishDetail dish={this.props.dishes.dishes.filter((dish) => dish.id === parseInt(match.params.dishId,10))[0]}
@@ -63,6 +82,13 @@ class Main extends Component {
         <Header />
         <Switch>
             <Route path='/home' component={HomePage} />
+            <Route path='/home2' component={HomePage2} />
+            <Route path='/content' component={Content} />
+            <Route path='/editorial' component={Editorial} />
+            <Route path='/benefits' component={Benefits} />
+            <Route path='/infreaders' component={Infreaders} />
+            <Route path='/infreviewers' component={Infreviewers} />
+            <Route path='/infauthors' component={Infauthors} />
             <Route path='/aboutus' component={() => <About leaders={this.props.leaders} />} />
             <Route exact path='/menu' component={() => <Menu dishes={this.props.dishes} />} />
             <Route path='/menu/:dishId' component={DishWithId} />
