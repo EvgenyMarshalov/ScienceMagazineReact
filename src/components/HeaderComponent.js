@@ -63,7 +63,7 @@ handleLogin(event) {
                 <Collapse isOpen={this.state.isNavOpen} navbar>
                     <Nav navbar ml-auto mr-auto>
                         <NavItem>
-                            <NavLink className="nav-link" to='/home2'><span className="fa fa-home fa-lg"></span> Home</NavLink>
+                            <NavLink className="nav-link" to='/home'><span className="fa fa-home fa-lg"></span> Home</NavLink>
                         </NavItem>
                         <NavItem>
                             <NavLink className="nav-link" to='/content'><span className="fa fa-book fa-lg"></span> Content</NavLink>
